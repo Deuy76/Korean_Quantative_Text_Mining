@@ -249,10 +249,16 @@ names(mining.TXT.token.df) <- make.names(names(mining.TXT.token.df))
 
 mining.TXT.token.dfm<-dfm_select(mining.TXT.token.dfm, min_nchar=3)
 
+# =======================================
+# 상대 빈도 분석
+# =======================================
+key <- textstat_keyness(mining.TXT.token.dfm)
+head(key, 20) %>% knitr::kable()
+
 
 
 # =======================================
-# 빈도계산 만들기
+# 빈도 그래프 만들기
 # =======================================
 
 

@@ -272,6 +272,13 @@ ggplot(mining.TXT.token.dfm.inaug, aes(x = feature, y = frequency)) +
   theme_minimal(base_family = "AppleGothic") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
+# =======================================
+# Word Cloud 만들기
+# =======================================
+
+# Word Cloud 만들기
+wordcloud.results <- textplot_wordcloud(mining.TXT.token.dfm, min_count = 5, random_order = FALSE,
+                                        rotation = .25, font ="AppleMyungjo", color = RColorBrewer::brewer.pal(8,"Dark2"))
 
 # =======================================
 # Co-occurrences Network 만들기
@@ -292,14 +299,6 @@ textplot_network(mining.TXT.textplot.Network,
                    min(rowSums(mining.TXT.textplot.Network)),
                  min_freq = 0.95,
                  vertex_labelfont = "AppleMyungjo", edge_size = 5)
-
-# =======================================
-# Word Cloud 만들기
-# =======================================
-
-# Word Cloud 만들기
-wordcloud.results <- textplot_wordcloud(mining.TXT.token.dfm, min_count = 5, random_order = FALSE,
-                                        rotation = .25, font ="AppleMyungjo", color = RColorBrewer::brewer.pal(8,"Dark2"))
 
 
 # =======================================

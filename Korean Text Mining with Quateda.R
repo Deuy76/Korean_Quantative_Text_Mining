@@ -250,14 +250,6 @@ names(mining.TXT.token.df) <- make.names(names(mining.TXT.token.df))
 mining.TXT.token.dfm<-dfm_select(mining.TXT.token.dfm, min_nchar=3)
 
 # =======================================
-# 상대 빈도 분석
-# =======================================
-key <- textstat_keyness(mining.TXT.token.dfm)
-head(key, 20) %>% knitr::kable()
-
-
-
-# =======================================
 # 빈도 그래프 만들기
 # =======================================
 
@@ -276,9 +268,21 @@ ggplot(mining.TXT.token.dfm.inaug, aes(x = feature, y = frequency)) +
 # Word Cloud 만들기
 # =======================================
 
-# Word Cloud 만들기
 wordcloud.results <- textplot_wordcloud(mining.TXT.token.dfm, min_count = 5, random_order = FALSE,
                                         rotation = .25, font ="AppleMyungjo", color = RColorBrewer::brewer.pal(8,"Dark2"))
+
+# =======================================
+# 상대 빈도 분석
+# =======================================
+key <- textstat_keyness(mining.TXT.token.dfm)
+head(key, 20) %>% knitr::kable()
+
+# =======================================
+# Topic Model 만들기 
+# =======================================
+
+topic<- LDA(convert(mining.TXT.token.dfm, to = "topicmodels"), k = 10)
+get_terms(topic, 10) %>% knitr::kable()
 
 # =======================================
 # Co-occurrences Network 만들기
